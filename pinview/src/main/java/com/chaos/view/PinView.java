@@ -878,6 +878,18 @@ public class PinView extends AppCompatEditText {
         this.mHideLineWhenFilled = hideLineWhenFilled;
     }
 
+    /**
+     * Specifies whether the line (border) should be highlighted or not when text entered.
+     * By the default, this flag is false and the line is not highlighted.
+     *
+     * @param highlightLineWhenFilled true to highlight line on a position where text entered,
+     *                           false to not highlight line
+     * @attr ref R.styleable#PinView_highlightLineWhenFilled
+     */
+    public void setHighlightLineWhenFilled(boolean highlightLineWhenFilled) {
+        this.mHighlightLineWhenFilled = highlightLineWhenFilled;
+    }
+
     @Override
     public void setTextSize(float size) {
         super.setTextSize(size);
