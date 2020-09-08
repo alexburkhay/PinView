@@ -41,7 +41,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -114,6 +113,9 @@ public class PinView extends AppCompatEditText {
     private boolean mHideLineWhenFilled;
     private boolean mHighlightLineWhenFilled;
 
+    private boolean mBlinkFocusedLine;
+    private boolean keepLastLineFocused = false;
+
     public PinView(Context context) {
         this(context, null);
     }
@@ -156,6 +158,7 @@ public class PinView extends AppCompatEditText {
         mItemBackground = a.getDrawable(R.styleable.PinView_android_itemBackground);
         mHideLineWhenFilled = a.getBoolean(R.styleable.PinView_hideLineWhenFilled, false);
         mHighlightLineWhenFilled = a.getBoolean(R.styleable.PinView_highlightLineWhenFilled, false);
+        mBlinkFocusedLine = a.getBoolean(R.styleable.PinView_blinkFocusedLine, false);
 
         a.recycle();
 
@@ -388,7 +391,7 @@ public class PinView extends AppCompatEditText {
             if (mViewType == VIEW_TYPE_RECTANGLE) {
                 drawPinBox(canvas, i);
             } else if (mViewType == VIEW_TYPE_LINE) {
-                drawPinLine(canvas, i);
+                drawPinLine(canvas, i, highlight);
             }
 
             if (DBG) {
@@ -459,7 +462,7 @@ public class PinView extends AppCompatEditText {
         canvas.drawPath(mPath, mPaint);
     }
 
-    private void drawPinLine(Canvas canvas, int i) {
+    private void drawPinLine(Canvas canvas, int i, boolean isHighlighted) {
         if (mHideLineWhenFilled && i < getText().length()) {
             return;
         }
@@ -477,8 +480,18 @@ public class PinView extends AppCompatEditText {
                 l = r = false;
             }
         }
+
+        int color = mPaint.getColor();
+        float width = mPaint.getStrokeWidth();
+        if (drawCursor && mBlinkFocusedLine && isHighlighted) {
+            mPaint.setColor(mCursorColor);
+            mPaint.setStrokeWidth(mCursorWidth);
+        } else {
+            mPaint.setStrokeWidth(((float) mLineWidth) / 10);
+            width = mPaint.getStrokeWidth();
+        }
+
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth(((float) mLineWidth) / 10);
         float halfLineWidth = ((float) mLineWidth) / 2;
         mItemLineRect.set(
                 mItemBorderRect.left - halfLineWidth,
@@ -488,10 +501,13 @@ public class PinView extends AppCompatEditText {
 
         updateRoundRectPath(mItemLineRect, mPinItemRadius, mPinItemRadius, l, r);
         canvas.drawPath(mPath, mPaint);
+
+        mPaint.setColor(color);
+        mPaint.setStrokeWidth(width);
     }
 
     private void drawCursor(Canvas canvas) {
-        if (drawCursor) {
+        if (drawCursor && !mBlinkFocusedLine) {
             float cx = mItemCenterPoint.x;
             float cy = mItemCenterPoint.y;
             float x = cx;
@@ -904,6 +920,17 @@ public class PinView extends AppCompatEditText {
      */
     public void setHighlightLineWhenFilled(boolean highlightLineWhenFilled) {
         this.mHighlightLineWhenFilled = highlightLineWhenFilled;
+    }
+
+    /**
+     * Specifies whether the last line (border) should be kept focused or not when text entered or not.
+     * By the default, this flag is false.
+     *
+     * @param keepLastLineFocused true to keep highlight line on a position where text entered,
+     *                           false to not highlight line
+     */
+    public void setKeepLastLineFocused(boolean keepLastLineFocused) {
+        this.keepLastLineFocused = keepLastLineFocused;
     }
 
     @Override

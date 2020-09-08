@@ -75,7 +75,7 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="normal"
-            app:cursorColor="@android:color/holo_blue_light"
+            app:cursorColor="@color/cursorColor"
             app:cursorWidth="2dp"
             app:hideLineWhenFilled="false"
             app:itemCount="6"
@@ -84,7 +84,8 @@
             app:itemSpacing="8dp"
             app:itemWidth="24dp"
             app:lineColor="@color/highlight_line_colors"
-            app:highlightLineWhenFilled="true"
+            app:highlightLineWhenFilled="false"
+            app:blinkFocusedLine="true"
             app:lineWidth="1dp"
             app:viewType="line" />
 
@@ -93,7 +94,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:padding="@dimen/common_padding"
-            android:text="PIN"
+            android:text="@string/pin_label"
             android:textColor="@color/colorAccent"
             app:hideLineWhenFilled="true"
             app:itemCount="3"

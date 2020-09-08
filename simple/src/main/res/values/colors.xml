@@ -28,7 +28,9 @@
     <color name="line_focused">#3F51B5</color>
     <color name="line_default">#C5CAE9</color>
 
-    <color name="highlight_line_selected">#0074e5</color>
+    <color name="cursorColor">#0074e5</color>
+
+    <color name="highlight_line_selected">@color/line_default</color>
     <color name="highlight_line_focused">@color/line_default</color>
     <color name="highlight_line_default">@color/line_default</color>
 </resources>
