@@ -64,6 +64,31 @@
             android:text="1234" />
 
         <com.chaos.view.PinView
+            android:id="@+id/pin_view"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_padding"
+            android:cursorVisible="true"
+            android:inputType="numberDecimal"
+            android:itemBackground="@android:color/transparent"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:cursorColor="@android:color/holo_blue_light"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="32dp"
+            app:itemRadius="0dp"
+            app:itemSpacing="8dp"
+            app:itemWidth="24dp"
+            app:lineColor="@color/highlight_line_colors"
+            app:highlightLineWhenFilled="true"
+            app:lineWidth="1dp"
+            app:viewType="line" />
+
+        <com.chaos.view.PinView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
