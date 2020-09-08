@@ -25,7 +25,7 @@
         android:id="@+id/firstLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/firstPinView"
+        android:layout_alignStart="@+id/firstPinView"
         android:layout_alignParentTop="true"
         android:text="@string/pin_label" />
 
@@ -44,7 +44,7 @@
         android:id="@+id/firstPasswordHidden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/firstPinView"
+        android:layout_alignEnd="@+id/firstPinView"
         android:layout_alignBaseline="@+id/firstLabel"
         android:checked="false"
         android:text="hidden" />
@@ -53,7 +53,7 @@
         android:id="@+id/secondLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/secondPinView"
+        android:layout_alignStart="@+id/secondPinView"
         android:layout_below="@+id/firstPinView"
         android:text="@string/password_label" />
 
@@ -74,7 +74,7 @@
         android:id="@+id/secondPasswordHidden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/secondPinView"
+        android:layout_alignEnd="@+id/secondPinView"
         android:layout_alignBaseline="@+id/secondLabel"
         android:checked="true"
         android:text="hidden" />

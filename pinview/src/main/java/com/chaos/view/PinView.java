@@ -177,6 +177,10 @@ public class PinView extends AppCompatEditText {
         isPasswordHidden = isPasswordInputType(getInputType());
     }
 
+    public boolean isRtl() {
+        return ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
+    }
+
     // preserve the legacy behavior: isPasswordHidden controlled by inputType
     @Override
     public void setInputType(int type) {
@@ -284,6 +288,10 @@ public class PinView extends AppCompatEditText {
             height = boxHeight + getPaddingTop() + getPaddingBottom();
         }
 
+        if (isRtl()) {
+            // layout initialized -> rotate for rtl
+            setRotationY(180);
+        }
         setMeasuredDimension(width, height);
     }
 
@@ -597,7 +605,15 @@ public class PinView extends AppCompatEditText {
         float cy = mItemCenterPoint.y;
         float x = cx - Math.abs((float) mTextRect.width()) / 2 - mTextRect.left;
         float y = cy + Math.abs((float) mTextRect.height()) / 2 - mTextRect.bottom;// always center vertical
+
+        boolean isRtl = isRtl();
+        if (isRtl) {
+            canvas.scale(-1f, 1f, cx, cy);
+        }
         canvas.drawText(text, charAt, charAt + 1, x, y, paint);
+        if (isRtl) {
+            canvas.scale(-1f, 1f, cx, cy);
+        }
     }
 
     private void drawCircle(Canvas canvas, int i) {
