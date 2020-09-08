@@ -114,7 +114,7 @@ public class PinView extends AppCompatEditText {
     private boolean mHighlightLineWhenFilled;
 
     private boolean mBlinkFocusedLine;
-    private boolean keepLastLineFocused = false;
+    private boolean keepLastFocusedLineHighlighted = false;
 
     public PinView(Context context) {
         this(context, null);
@@ -369,7 +369,8 @@ public class PinView extends AppCompatEditText {
     private void drawPinView(Canvas canvas) {
         int highlightIdx = getText().length();
         for (int i = 0; i < mPinItemCount; i++) {
-            boolean highlight = isFocused() && highlightIdx == i;
+            boolean highlight = isFocused() && (highlightIdx == i || (keepLastFocusedLineHighlighted
+                && highlightIdx == mPinItemCount && i == mPinItemCount - 1));
 
             mPaint.setColor(highlight || (mHighlightLineWhenFilled && i < highlightIdx) ? getLineColorForState(HIGHLIGHT_STATES) : mCurLineColor);
 
@@ -926,11 +927,11 @@ public class PinView extends AppCompatEditText {
      * Specifies whether the last line (border) should be kept focused or not when text entered or not.
      * By the default, this flag is false.
      *
-     * @param keepLastLineFocused true to keep highlight line on a position where text entered,
+     * @param keepLastFocusedLineHighlighted true to keep highlight line on a position where text entered,
      *                           false to not highlight line
      */
-    public void setKeepLastLineFocused(boolean keepLastLineFocused) {
-        this.keepLastLineFocused = keepLastLineFocused;
+    public void setKeepLastFocusedLineHighlighted(boolean keepLastFocusedLineHighlighted) {
+        this.keepLastFocusedLineHighlighted = keepLastFocusedLineHighlighted;
     }
 
     @Override

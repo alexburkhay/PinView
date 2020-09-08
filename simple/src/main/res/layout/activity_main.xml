@@ -64,7 +64,7 @@
             android:text="1234" />
 
         <com.chaos.view.PinView
-            android:id="@+id/pin_view"
+            android:id="@+id/linesView"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

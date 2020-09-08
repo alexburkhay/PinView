@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         pinView.setItemBackground(getResources().getDrawable(R.drawable.item_background));
         pinView.setItemBackgroundResources(R.drawable.item_background);
         pinView.setHideLineWhenFilled(false);
+
+        PinView linesView = findViewById(R.id.linesView);
+        linesView.setKeepLastFocusedLineHighlighted(true);
     }
 
     @Override
