@@ -1,12 +1,12 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def siteUrl = 'https://github.com/ChaosLeong/PinView'
+def siteUrl = 'https://github.com/alexburkhay/PinView'
 def issueUrl = 'https://github.com/ChaosLeong/PinView/issues'
-def gitUrl = 'git@github.com:ChaosLeong/PinView.git'
+def gitUrl = 'https://github.com/alexburkhay/PinView.git'
 
-group = "com.chaos.view"
-version = "1.4.3"
+group = "com.github.alexburkhay"
+version = "1.4.5"
 
 install {
     repositories.mavenInstaller {

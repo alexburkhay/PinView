@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-   implementation 'com.chaos.view:pinview:1.4.3'
+   implementation 'com.chaos.view:pinview:1.4.5'
 }
 ```
 
