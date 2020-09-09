@@ -6,7 +6,7 @@ def issueUrl = 'https://github.com/ChaosLeong/PinView/issues'
 def gitUrl = 'https://github.com/alexburkhay/PinView.git'
 
 group = "com.github.alexburkhay"
-version = "1.4.5"
+version = "1.4.6"
 
 install {
     repositories.mavenInstaller {
