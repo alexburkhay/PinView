@@ -86,7 +86,7 @@
             app:lineColor="@color/highlight_line_colors"
             app:highlightLineWhenFilled="false"
             app:blinkFocusedLine="true"
-            app:lineWidth="1dp"
+            app:lineWidth="1px"
             app:viewType="line" />
 
         <com.chaos.view.PinView

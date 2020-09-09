@@ -112,9 +112,11 @@ public class PinView extends AppCompatEditText {
 
     private boolean mHideLineWhenFilled;
     private boolean mHighlightLineWhenFilled;
+    private boolean keepLastFocusedLineHighlighted = false;
 
     private boolean mBlinkFocusedLine;
-    private boolean keepLastFocusedLineHighlighted = false;
+    private boolean useCursorWidthForBlinkingLine = false;
+
 
     public PinView(Context context) {
         this(context, null);
@@ -484,7 +486,8 @@ public class PinView extends AppCompatEditText {
 
         int color = mPaint.getColor();
         float width = mPaint.getStrokeWidth();
-        if (drawCursor && mBlinkFocusedLine && isHighlighted) {
+        boolean isLineBlinking = drawCursor && mBlinkFocusedLine && isHighlighted;
+        if (isLineBlinking) {
             mPaint.setColor(mCursorColor);
             mPaint.setStrokeWidth(mCursorWidth);
         } else {
@@ -494,11 +497,12 @@ public class PinView extends AppCompatEditText {
 
         mPaint.setStyle(Paint.Style.FILL);
         float halfLineWidth = ((float) mLineWidth) / 2;
+        float topBottomMargin = useCursorWidthForBlinkingLine && isLineBlinking ? ((float) mCursorWidth) / 2 : halfLineWidth;
         mItemLineRect.set(
                 mItemBorderRect.left - halfLineWidth,
-                mItemBorderRect.bottom - halfLineWidth,
+                mItemBorderRect.bottom - topBottomMargin,
                 mItemBorderRect.right + halfLineWidth,
-                mItemBorderRect.bottom + halfLineWidth);
+                mItemBorderRect.bottom + topBottomMargin);
 
         updateRoundRectPath(mItemLineRect, mPinItemRadius, mPinItemRadius, l, r);
         canvas.drawPath(mPath, mPaint);
@@ -932,6 +936,10 @@ public class PinView extends AppCompatEditText {
      */
     public void setKeepLastFocusedLineHighlighted(boolean keepLastFocusedLineHighlighted) {
         this.keepLastFocusedLineHighlighted = keepLastFocusedLineHighlighted;
+    }
+
+    public void setUseCursorWidthForBlinkingLine(boolean useCursorWidthForBlinkingLine) {
+        this.useCursorWidthForBlinkingLine = useCursorWidthForBlinkingLine;
     }
 
     @Override

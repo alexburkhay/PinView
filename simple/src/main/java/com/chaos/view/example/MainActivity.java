@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         PinView linesView = findViewById(R.id.linesView);
         linesView.setKeepLastFocusedLineHighlighted(true);
+        linesView.setUseCursorWidthForBlinkingLine(true);
     }
 
     @Override
